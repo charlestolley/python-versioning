@@ -31,6 +31,22 @@ class Version:
         except AttributeError:
             return NotImplemented
 
+    def __lt__(self, other: "Version"):
+        if self.major < other.major:
+            return True
+        elif other.major < self.major:
+            return False
+        elif self.minor < other.minor:
+            return True
+        elif other.minor < self.minor:
+            return False
+        elif self.patch < other.patch:
+            return True
+        elif other.patch < self.patch:
+            return False
+        else:
+            return False
+
     def __hash__(self):
         return hash(self.numbers)
 

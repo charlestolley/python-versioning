@@ -23,6 +23,32 @@ class VersionTest(unittest.TestCase):
     def test_not_equal_to_objects_of_other_types(self):
         self.assertNotEqual(Version(1), 1)
 
+    def test_not_less_than_equal_Version(self):
+        self.assertFalse(Version(1, 5, 9) < Version(1, 5, 9))
+
+    def test_less_than_Version_with_higher_major_number(self):
+        self.assertTrue(Version(1, 5, 9) < Version(2, 5, 9))
+        self.assertTrue(Version(2, 5, 9) < Version(3))
+
+    def test_not_less_than_Version_with_lower_major_number(self):
+        self.assertFalse(Version(2) < Version(1, 5, 9))
+        self.assertFalse(Version(2, 4) < Version(1, 5, 9))
+        self.assertFalse(Version(2, 5, 8) < Version(1, 5, 9))
+
+    def test_less_than_Version_with_equal_major_but_higher_minor_number(self):
+        self.assertTrue(Version(1, 5, 9) < Version(1, 6, 9))
+        self.assertTrue(Version(1, 6, 9) < Version(1, 7))
+
+    def test_not_less_than_Version_w_equal_major_but_lower_minor_number(self):
+        self.assertFalse(Version(1, 6) < Version(1, 5, 9))
+        self.assertFalse(Version(1, 6, 8) < Version(1, 5, 9))
+
+    def test_less_than_Version_with_equal_minor_but_higher_patch_number(self):
+        self.assertTrue(Version(1, 5, 9) < Version(1, 5, 10))
+
+    def test_not_less_than_Version_w_equal_minor_but_lower_patch_number(self):
+        self.assertFalse(Version(1, 5, 10) < Version(1, 5, 9))
+
     def test_parse_converts_str_to_Version(self):
         self.assertEqual(Version.parse("1.2.3"), Version(1, 2, 3))
 
