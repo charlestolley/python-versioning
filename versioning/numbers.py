@@ -1,17 +1,15 @@
-__all__ = ["VersionIdentifier"]
+__all__ = ["Version"]
 
-class VersionIdentifier:
-    def __init__(self, major:int, minor:int=0, patch:int=0, edition:int=0):
+class Version:
+    def __init__(self, major:int, minor:int=0, patch:int=0):
         if major < 0:
             raise ValueError(f"Invalid major version number: {major}")
         elif minor < 0:
             raise ValueError(f"Invalid minor version number: {minor}")
         elif patch < 0:
             raise ValueError(f"Invalid patch version number: {patch}")
-        elif edition < 0:
-            raise ValueError(f"Invalid edition number: {edition}")
 
-        self.numbers = (major, minor, patch, edition)
+        self.numbers = (major, minor, patch)
 
     @property
     def major(self) -> int:
@@ -25,16 +23,11 @@ class VersionIdentifier:
     def patch(self) -> int:
         return self.numbers[2]
 
-    @property
-    def edition(self) -> int:
-        return self.numbers[3]
-
     def __eq__(self, other):
         try:
             return (self.major == other.major
             and self.minor == other.minor
-            and self.patch == other.patch
-            and self.edition == other.edition)
+            and self.patch == other.patch)
         except AttributeError:
             return NotImplemented
 
