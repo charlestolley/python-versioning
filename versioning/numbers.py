@@ -47,6 +47,12 @@ class Version:
         else:
             return False
 
+    def __ge__(self, other: "Version"):
+        return not (self < other)
+
+    def __le__(self, other: "Version"):
+        return not (self > other)
+
     def __hash__(self):
         return hash(self.numbers)
 

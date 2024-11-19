@@ -49,6 +49,48 @@ class VersionTest(unittest.TestCase):
     def test_not_less_than_Version_w_equal_minor_but_lower_patch_number(self):
         self.assertFalse(Version(1, 5, 10) < Version(1, 5, 9))
 
+    def test_greater_than_is_the_reverse_of_less_than(self):
+        self.assertTrue(Version(2, 5, 9)    > Version(1, 5, 9))
+        self.assertTrue(Version(3)          > Version(2, 5, 9))
+        self.assertTrue(Version(1, 6, 9)    > Version(1, 5, 9))
+        self.assertTrue(Version(1, 7)       > Version(1, 6, 9))
+        self.assertTrue(Version(1, 5, 10)   > Version(1, 5, 9))
+        self.assertFalse(Version(1, 5, 9)   > Version(1, 5, 9))
+        self.assertFalse(Version(1, 5, 9)   > Version(2))
+        self.assertFalse(Version(1, 5, 9)   > Version(2, 4))
+        self.assertFalse(Version(1, 5, 9)   > Version(2, 5, 8))
+        self.assertFalse(Version(1, 5, 9)   > Version(1, 6))
+        self.assertFalse(Version(1, 5, 9)   > Version(1, 6, 8))
+        self.assertFalse(Version(1, 5, 9)   > Version(1, 5, 10))
+
+    def test_greater_than_or_equal_is_the_inverse_of_less_than(self):
+        self.assertFalse(Version(1, 5, 9)   >= Version(2, 5, 9))
+        self.assertFalse(Version(2, 5, 9)   >= Version(3))
+        self.assertFalse(Version(1, 5, 9)   >= Version(1, 6, 9))
+        self.assertFalse(Version(1, 6, 9)   >= Version(1, 7))
+        self.assertFalse(Version(1, 5, 9)   >= Version(1, 5, 10))
+        self.assertTrue(Version(1, 5, 9)    >= Version(1, 5, 9))
+        self.assertTrue(Version(2)          >= Version(1, 5, 9))
+        self.assertTrue(Version(2, 4)       >= Version(1, 5, 9))
+        self.assertTrue(Version(2, 5, 8)    >= Version(1, 5, 9))
+        self.assertTrue(Version(1, 6)       >= Version(1, 5, 9))
+        self.assertTrue(Version(1, 6, 8)    >= Version(1, 5, 9))
+        self.assertTrue(Version(1, 5, 10)   >= Version(1, 5, 9))
+
+    def test_less_than_or_equal_is_the_inverse_of_greater_than(self):
+        self.assertFalse(Version(2, 5, 9)   <= Version(1, 5, 9))
+        self.assertFalse(Version(3)         <= Version(2, 5, 9))
+        self.assertFalse(Version(1, 6, 9)   <= Version(1, 5, 9))
+        self.assertFalse(Version(1, 7)      <= Version(1, 6, 9))
+        self.assertFalse(Version(1, 5, 10)  <= Version(1, 5, 9))
+        self.assertTrue(Version(1, 5, 9)    <= Version(1, 5, 9))
+        self.assertTrue(Version(1, 5, 9)    <= Version(2))
+        self.assertTrue(Version(1, 5, 9)    <= Version(2, 4))
+        self.assertTrue(Version(1, 5, 9)    <= Version(2, 5, 8))
+        self.assertTrue(Version(1, 5, 9)    <= Version(1, 6))
+        self.assertTrue(Version(1, 5, 9)    <= Version(1, 6, 8))
+        self.assertTrue(Version(1, 5, 9)    <= Version(1, 5, 10))
+
     def test_parse_converts_str_to_Version(self):
         self.assertEqual(Version.parse("1.2.3"), Version(1, 2, 3))
 
