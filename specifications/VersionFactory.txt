@@ -1,0 +1,16 @@
+versioning.VersionFactory API version 1.0.0
+===========================================
+A VersionFactory is a callable object that returns an instance of Version. The
+version of Version that the factory returns is implementation-dependent.
+
+Signature
+---------
+__call__(self, major: int, minor: int = 0, patch: int = 0): These three
+    arguments correspond with the three parts of a Version number. The major
+    version number is the only required argument.
+
+Exceptions
+----------
+ValueError: Raised if any of the arguments are less than zero.
+Aside from the above, and so long as all arguments use the correct data types,
+    this call is non-throwing.

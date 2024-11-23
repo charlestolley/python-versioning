@@ -1,0 +1,15 @@
+versioning.VersionParser API version 1.0.0
+==========================================
+A VersionParser can construct Version objects by parsing a version
+string.
+
+Public Methods
+--------------
+parse(version: str) -> Version: This method decodes a string, with a format of
+    "major.minor.patch". This has the property that for a string s, encoding
+    a valid version number, "str(VersionParser.parse(s)) == s".
+
+Exceptions
+----------
+ValueError: Raised if "version" contains an improperly formatted string, inclu-
+    ding if any of the numbers are negative.

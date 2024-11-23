@@ -1,0 +1,41 @@
+versioning.Version API version 1.0.0
+====================================
+A Version represents a version number consisting of three non-negative integers,
+called the "major version number," "minor version number," and "patch version
+number," respectively. Version number ordering is dictated by the first non-
+matching number. For example, version 1.2.3 is less than version 1.3.0, because
+the major version number is the same, and the minor version number is less, in
+spite of the greater patch version number.
+
+Public Read-Only Properties
+---------------------------
+major: Major version number, a non-negative int.
+minor: Minor version number, a non-negative int.
+patch: Patch version number, a non-negative int.
+
+Operators
+---------
+a == b: True if and only if a and b represent the exact same version.
+a < b: True if and only if a represents a lesser major version, or the same
+    major version but a lesser minor version, or the same major and minor, but a
+    lesser patch version.
+a <= b: Equivalent to "(a < b) or (a == b)"
+a > b: Equivalent to "b < a"
+a >= b: Equivalent to "(b < a) or (b == a)"
+
+Supported Builtin Functions
+---------------------------
+hash(): Allows the Version to be used as a dictionary key.
+str(): Convert to a human-readable string, formatted as "major.minor.patch".
+
+Notes
+-----
+The behavior of the less-than[-or-equal] and greater-than[-or-equal] operators
+    is undefined if the operands are not Versions (implementing version 1.0).
+    Note that this does not apply to the equality operator, which accepts arg-
+    uments of any type.
+
+Exceptions
+----------
+As long as all arguments use the correct data types, all methods and properties
+    are non-throwing.
